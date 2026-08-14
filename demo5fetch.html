@@ -1,33 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Demo Fetch in JS</title>
-</head>
-<body>
+  </head>
+  <body>
     <style>
-        table{
-            border: 1px solid black;
-            margin: auto;
-            padding: 20px;
-        }
+      table {
+        border-collapse: collapse;
+        margin: auto;
+        padding: 20px;
+      }
+      th,
+      td {
+        border: 1px solid black;
+      }
     </style>
 
+    <h1><center>List of Products</center></h1>
     <table border="1">
-        <thead>
-            <tr>
-                <th>Sr. No.</th>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Rating</th>
-            </tr>
-        </thead>
-        <tbody  id="data">
-            
-        </tbody>
+      <thead>
+        <tr>
+          <th>Sr. No.</th>
+          <th>Title</th>
+          <th>Images</th>
+          <th>Category</th>
+          <th>Rating</th>
+          <th>Stock</th>
+          <th>Prices(₹)</th>
+          <th>Add to Cart</th>
+        </tr>
+      </thead>
+      <tbody id="data"></tbody>
     </table>
-    <script src="demo5.js"> </script>
-</body>
+
+    <script src="demo5.js"></script>
+  </body>
 </html>
