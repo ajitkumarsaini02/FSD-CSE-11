@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo fetch</title>
+  </head>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin: auto;
+      padding: 20px;
+      background-color: aquamarine;
+    }
+    th,
+    td {
+      border: 3px solid red;
+    }
+    #btn {
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 30px;
+    }
+  </style>
+  <body>
+    <h1><center>List of Products</center></h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Sr. No.</th>
+          <th>Title</th>
+          <th>Images</th>
+          <th>Category</th>
+          <th>Rating</th>
+          <th>Prices(₹)</th>
+          <th>Stock</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="data"></tbody>
+    </table>
+
+    <h2><center>Place Order Details</center></h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Sr. No.</th>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Price (₹)</th>
+          <th>Quantity</th>
+          <th>Total (₹)</th>
+        </tr>
+      </thead>
+      <tbody id="orderData">
+        <tr>
+          <td colspan="6" style="text-align: center">No products added yet</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="5" style="text-align: right">Subtotal (₹)</th>
+          <th id="subTotal">₹0.00</th>
+        </tr>
+        <tr>
+          <th colspan="5" style="text-align: right">GST 18% (₹)</th>
+          <th id="gstAmount">₹0.00</th>
+        </tr>
+        <tr>
+          <th colspan="5" style="text-align: right">Final Total (₹)</th>
+          <th id="grandTotal">₹0.00</th>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+  <script>
+    let rate = 0;
+    let products = [];
+    const cart = [];
+
+    async function loadProducts() {
+      const URL = "https://dummyjson.com/products?limit=10&skip=50";
+      try {
+        const res = await fetch(URL);
+        console.log("res", res);
+
+        const data = await res.json();
+        console.log("Data ", data.products);
+        products = data.products;
+        let row = "";
+        data.products.map(
+          (i, index) =>
+            (row += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${i.title}</td>
+                    <td><img src="${i.images[0]}" width=100px height="100px"></td>
+                    <td>${i.category}</td>
+                    <td>${i.rating}</td>
+                    <td>₹${(i.price * rate).toFixed(2)}</td>
+                    <td>${i.stock}</td>
+                    <td><button id="btn" onclick="addToCart(${i.id})">Add to Cart</button></td>
+                </tr>
+                    `),
+        );
+        document.getElementById("data").innerHTML = row;
+      } catch (err) {
+        console.log("Error: ", err);
+      }
+    }
+
+    function renderOrderDetails() {
+      const orderTable = document.getElementById("orderData");
+      const subTotalCell = document.getElementById("subTotal");
+      const gstAmountCell = document.getElementById("gstAmount");
+      const grandTotalCell = document.getElementById("grandTotal");
+
+      if (cart.length === 0) {
+        orderTable.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align: center">No products added yet</td>
+          </tr>
+        `;
+        subTotalCell.textContent = "₹0.00";
+        gstAmountCell.textContent = "₹0.00";
+        grandTotalCell.textContent = "₹0.00";
+        return;
+      }
+
+      let orderRows = "";
+      let grandTotal = 0;
+      cart.forEach((item, index) => {
+        const unitPrice = (item.price * rate).toFixed(2);
+        const itemTotal = item.price * rate * item.qty;
+        const totalPrice = itemTotal.toFixed(2);
+        grandTotal += itemTotal;
+
+        orderRows += `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${item.title}</td>
+            <td>${item.category}</td>
+            <td>₹${unitPrice}</td>
+            <td>${item.qty}</td>
+            <td>₹${totalPrice}</td>
+          </tr>
+        `;
+      });
+
+      const gstAmount = grandTotal * 0.18;
+      const finalTotal = grandTotal + gstAmount;
+
+      orderTable.innerHTML = orderRows;
+      subTotalCell.textContent = `₹${grandTotal.toFixed(2)}`;
+      gstAmountCell.textContent = `₹${gstAmount.toFixed(2)}`;
+      grandTotalCell.textContent = `₹${finalTotal.toFixed(2)}`;
+    }
+
+    function addToCart(productId) {
+      const selectedProduct = products.find((item) => item.id === productId);
+      if (!selectedProduct) {
+        return;
+      }
+      const existingProduct = cart.find((item) => item.id === productId);
+      if (existingProduct) {
+        existingProduct.qty += 1;
+      } else {
+        cart.push({ ...selectedProduct, qty: 1 });
+      }
+      renderOrderDetails();
+    }
+
+    async function getRate() {
+      const URL = "https://open.er-api.com/v6/latest/USD";
+      try {
+        const res = await fetch(URL);
+        const rate = await res.json();
+        return rate.rates.INR;
+      } catch (err) {
+        console.log("Error: ", err);
+      }
+    }
+
+    const test = async () => {
+      rate = await getRate();
+      console.log("Rate ", rate);
+    };
+
+    test();
+    loadProducts();
+  </script>
+</html>

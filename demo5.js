@@ -4,7 +4,7 @@ async function loadProduct() {
   try {
     const res = await fetch(URL);
     const data = await res.json();
-    console.log("res", res);
+    console.log("res", res);-+
     console.log("Data", data);
     const tbody = document.getElementById("data");
     data.products.map((i, idx) => {
@@ -12,7 +12,7 @@ async function loadProduct() {
             <tr>
                 <td>${idx + 1}</td>
                 <td>${i.title}</td>
-                <td><img src="${i.images[0]}" width=100px height="100px"</td>
+                <td><img src="${i.images[0]}" width=100px height="100px"></td>
                 <td>${i.category}</td>
                 <td>${i.rating}</td>
                 <td>${i.stock}</td>
