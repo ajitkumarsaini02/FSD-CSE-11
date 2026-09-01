@@ -6,30 +6,107 @@
     <title>Book Store</title>
   </head>
   <style>
-    h1 {
-      text-align: center;
-    }
-    .card {
-      width: 250px;
-      height: 250px;
-      border: 2px solid green;
-      margin: auto;
-      border-radius: 20px;
-      text-align: center;
-      padding: 10px;
-      background-color: antiquewhite;
-    }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    #root {
-      display: flex;
-      flex-wrap: wrap;
-      row-gap: 10px;
-      padding: 10px;
-    }
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+  }
+
+  h1 {
+    text-align: center;
+    margin: 25px 0;
+  }
+
+  #viewCart {
+    display: block;
+    margin: 0 auto 25px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #198754;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  #viewCart:hover {
+    background-color: #157347;
+  }
+
+  #root {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .card {
+    width: 270px;
+    min-height: 350px;
+    border: 2px solid green;
+    border-radius: 20px;
+    text-align: center;
+    padding: 15px;
+    background-color: antiquewhite;
+  }
+
+  .card img {
+    width: 150px;
+    height: 200px;
+    object-fit: contain;
+    margin: 10px auto;
+  }
+
+  .card h2 {
+    font-size: 18px;
+    margin: 8px 0;
+  }
+
+  .card p {
+    margin: 6px 0;
+  }
+
+  .card button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+  }
+
+  .card button:hover {
+    background-color: darkgreen;
+  }
+
+  #cart {
+    margin: 30px 20px;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    display: none;
+  }
+
+  #cart h2 {
+    margin-bottom: 15px;
+  }
+
+  #cart h3 {
+    margin: 8px 0;
+  }
+</style>
   </style>
   <body>
     <h1>Book Store</h1>
-    <button>View Cart</button>
+    <button id="viewCart">View Cart</button>
     <div id="root"></div>
     <div id="cart"></div>
   </body>
