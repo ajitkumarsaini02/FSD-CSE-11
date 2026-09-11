@@ -1,4 +1,3 @@
-# 5th Semester FSD
 
 This repository contains practice work for Full Stack Development, including
 JavaScript asynchronous programming, DOM manipulation, and React applications.
@@ -74,3 +73,4 @@ The Parcel app will print its local development URL in the terminal.
 - Vite
 - React Router
 - Parcel
+
