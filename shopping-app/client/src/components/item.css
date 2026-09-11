@@ -1,35 +1,75 @@
 .item {
-    width: 400px;
-    height: 400px;
-    background-color: bisque;
-    margin: 10px;
-    border: 2px solid red;
+    width: 100%;
+    max-width: 260px;
+    height: 370px;
+
+    background-color: white;
+
+    border: none;
+    border-radius: 16px;
+
+    padding: 18px;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    font-size: 20px;
-    border-radius: 20px;
+
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+    transition: 0.3s;
+}
+
+.item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.item img {
+    width: 135px;
+    height: 180px;
+
+    object-fit: contain;
+
+    margin-top: 5px;
 }
 
 .item h2 {
-    color: red;
-    margin: 5px;
-    padding: 5px;
+    color: #17283a;
+
+    font-size: 20px;
+
+    margin: 8px 0;
+
+    text-align: center;
 }
 
 .item h3 {
-    color: green;
-    margin: 5px;
-    padding: 5px;
+    color: #16803c;
+
+    font-size: 18px;
+
+    margin: 5px 0;
 }
 
 .btn {
-    height: 50px;
-    width: 120px;
-    border-radius: 20px;
+    width: 224px;
+    height: 46px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: #142233;
     color: white;
-    font-size: 20px;
-    background-color: black;
-    
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #f36c45;
 }
