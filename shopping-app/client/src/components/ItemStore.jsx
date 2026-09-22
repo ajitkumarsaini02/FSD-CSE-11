@@ -22,8 +22,8 @@ const ItemStore = () => {
     },
     {
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3iAlq8sUCYrF044d-ct5Sy0QDcObhNEb7NvJr3jy-1g&s=10",
-      title: "ReactJS",
+        "https://m.media-amazon.com/images/I/71A7t9Ze-jL._AC_UF1000,1000_QL80_.jpg",
+      title: "Engineering Graphics",
       price: 465,
     },
     {
